@@ -1,4 +1,4 @@
-package com.haibei.controller.app;
+package com.haibei.controller.ams;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class ApplicationController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 		System.out.println("application");
-		return "/application/index";
+		return "ams/application";
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.POST,headers = "Accept=application/json")

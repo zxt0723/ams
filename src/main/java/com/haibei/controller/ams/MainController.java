@@ -1,4 +1,4 @@
-package com.haibei.controller.app;
+package com.haibei.controller.ams;
 
 
 import java.util.HashMap;
@@ -19,16 +19,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/menuManage")
-public class MenuManageController
+@RequestMapping("/")
+public class MainController
 {
-  @RequestMapping(value="/",method=RequestMethod.GET)
+  
+  @RequestMapping(value="/main",method=RequestMethod.GET)
 
-  public String  list()
+  public String  main()
   { 
 
 	  System.out.println("main");
-	  return "/menuManage/list";
+	  return "/sys/main";
+  }
+  
+  @RequestMapping(value="/menu",method=RequestMethod.GET)
+  public String  menu()
+  {   
+	  System.out.println("menu");
+	  return "sys/leftMenu";
   }
   
 }

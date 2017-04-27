@@ -67,7 +67,7 @@
 	</div>
 	<div id="content">
 		<!-- Start .content-wrapper -->
-		<div class="content-wrapper" ng-view></div>
+		<div class="content-wrapper" ui-view></div>
 		<div class="clearfix"></div>
 	</div>
 
@@ -82,15 +82,19 @@
 	<script src="${pageContext.request.contextPath}/res/angular/1.4.9/angular.js"></script>
 	<script src="${pageContext.request.contextPath}/res/angular/1.4.9/angular-route.js"></script>
 	<script src="${pageContext.request.contextPath}/res/angular_expand/angular-ui/2.5.0/ui-bootstrap-tpls.js"></script>
+	<script src="${pageContext.request.contextPath}/res/angular_expand/angular-ui-router/angular-ui-router.min.js"></script>
 	<script src="${pageContext.request.contextPath}/res/angular_expand/angular-w5c-validator/2.4.25/w5cValidator.min.js"></script>
 	<script src="${pageContext.request.contextPath}/public/js/config.js"></script>
 	<script src="${pageContext.request.contextPath}/public/js/app/app.js"></script>
 	<script src="${pageContext.request.contextPath}/public/js/app/app.routers.js"></script>
 	<script src="${pageContext.request.contextPath}/public/js/app/app.services.js"></script>
 	<script src="${pageContext.request.contextPath}/public/js/app/app.directives.js"></script>
-	<script src="${pageContext.request.contextPath}/public/js/app/modules/application/ApplicationController.js"></script>
-	<script src="${pageContext.request.contextPath}/public/js/app/modules/resource/ResourceController.js"></script>
-
+	<script src="${pageContext.request.contextPath}/public/js/app/modules/ApplicationController.js"></script>
+	<script src="${pageContext.request.contextPath}/public/js/app/modules/BusinessController.js"></script>
+	<script src="${pageContext.request.contextPath}/public/js/app/modules/ResourceController.js"></script>
+	<script src="${pageContext.request.contextPath}/public/js/app/modules/InterfaceController.js"></script>
+	<script src="${pageContext.request.contextPath}/public/js/app/modules/ParamsController.js"></script>
+	<script src="${pageContext.request.contextPath}/public/js/app/modules/RoleController.js"></script>
 
 </body>
 </html>

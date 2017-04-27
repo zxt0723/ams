@@ -1,7 +1,7 @@
 /**
- * 
+ * ['ui.router']
  */
-var app=angular.module('myApp', ['ngRoute','ui.bootstrap','services','w5c.validator'])
+var app=angular.module('myApp', ['ngRoute','ui.bootstrap','ui.router','services','w5c.validator'])
 
 app.config(['$httpProvider',function($httpProvider) {
     $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';

@@ -13,9 +13,10 @@
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
-		<jackson.version>2.8.9</jackson.version>
 	</properties>
 	<dependencies>
+
+	
 		<!-- https://mvnrepository.com/artifact/aspectj/aspectjweaver -->
 		<dependency>
 			<groupId>aspectj</groupId>
@@ -91,12 +92,7 @@
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 		</dependency>
-		<!-- 导入Mysql数据库链接jar包 -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.30</version>
-		</dependency>
+		
 		<!-- 导入oracle数据库链接jar包 -->
 		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
 		<dependency>
@@ -118,14 +114,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- freemarker -->
-		<!-- https://mvnrepository.com/artifact/freemarker/freemarker -->
-		<dependency>
-			<groupId>freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>2.3.9</version>
-		</dependency>
-
 		<!-- 日志文件管理包 -->
 		<!-- log start -->
 		<dependency>
@@ -151,11 +139,6 @@
 		</dependency>
 		<!-- log end -->
 		<!-- 映入JSON -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
 		<!-- 上传组件包 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -172,7 +155,12 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-
+	<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+<dependency>
+    <groupId>cglib</groupId>
+    <artifactId>cglib</artifactId>
+    <version>3.1</version>
+</dependency>
 	</dependencies>
 	<build>
 		<plugins>
