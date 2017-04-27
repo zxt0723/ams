@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haibei.dao.application.ParamsMapper" >
+  <resultMap id="BaseResultMap" type="com.haibei.pojo.application.Params" >
+    <id column="WID" property="wid" jdbcType="DECIMAL" />
+    <result column="FUNC_ID" property="funcId" jdbcType="DECIMAL" />
+    <result column="PARAM_TYPE" property="paramType" jdbcType="VARCHAR" />
+    <result column="PARAM_NAME" property="paramName" jdbcType="VARCHAR" />
+    <result column="REQUIRED" property="required" jdbcType="VARCHAR" />
+    <result column="IS_VALIDATE" property="isValidate" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATION_TIME" property="creationTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+    <result column="MODIFICATION_TIME" property="modificationTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_STATUS" property="deleteStatus" jdbcType="VARCHAR" />
+    <result column="TABLE_VER" property="tableVer" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WID, FUNC_ID, PARAM_TYPE, PARAM_NAME, REQUIRED, IS_VALIDATE, CREATED_BY, CREATION_TIME, 
+    MODIFIED_BY, MODIFICATION_TIME, DELETE_STATUS, TABLE_VER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haibei.pojo.application.ParamsExample" >
+    <include refid="common.Oracle_Pagination_Head" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AMS_PARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="common.Oracle_Pagination_Tail" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AMS_PARAMS
+    where WID = #{wid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_AMS_PARAMS
+    where WID = #{wid}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haibei.pojo.application.ParamsExample" >
+    delete from T_AMS_PARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haibei.pojo.application.Params" >
+    insert into T_AMS_PARAMS (WID, FUNC_ID, PARAM_TYPE, PARAM_NAME, REQUIRED, IS_VALIDATE, 
+      CREATED_BY, CREATION_TIME, MODIFIED_BY, MODIFICATION_TIME, DELETE_STATUS, 
+      TABLE_VER)
+    values (#{wid}, #{funcId}, #{paramType}, #{paramName}, #{required}, #{isValidate}, 
+      #{createdBy}, #{creationTime}, #{modifiedBy}, #{modificationTime}, #{deleteStatus}, 
+      #{tableVer})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haibei.pojo.application.Params" >
+    insert into T_AMS_PARAMS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="funcId != null" >
+        FUNC_ID,
+      </if>
+      <if test="paramType != null" >
+        PARAM_TYPE,
+      </if>
+      <if test="paramName != null" >
+        PARAM_NAME,
+      </if>
+      <if test="required != null" >
+        REQUIRED,
+      </if>
+      <if test="isValidate != null" >
+        IS_VALIDATE,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="creationTime != null" >
+        CREATION_TIME,
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY,
+      </if>
+      <if test="modificationTime != null" >
+        MODIFICATION_TIME,
+      </if>
+      <if test="deleteStatus != null" >
+        DELETE_STATUS,
+      </if>
+      <if test="tableVer != null" >
+        TABLE_VER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid},
+      </if>
+      <if test="funcId != null" >
+        #{funcId},
+      </if>
+      <if test="paramType != null" >
+        #{paramType},
+      </if>
+      <if test="paramName != null" >
+        #{paramName},
+      </if>
+      <if test="required != null" >
+        #{required},
+      </if>
+      <if test="isValidate != null" >
+        #{isValidate},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy},
+      </if>
+      <if test="creationTime != null" >
+        #{creationTime},
+      </if>
+      <if test="modifiedBy != null" >
+        #{modifiedBy},
+      </if>
+      <if test="modificationTime != null" >
+        #{modificationTime},
+      </if>
+      <if test="deleteStatus != null" >
+        #{deleteStatus},
+      </if>
+      <if test="tableVer != null" >
+        #{tableVer},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haibei.pojo.application.ParamsExample" resultType="java.lang.Integer" >
+    select count(*) from T_AMS_PARAMS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AMS_PARAMS
+    <set >
+      <if test="record.wid != null" >
+        WID = #{record.wid},
+      </if>
+      <if test="record.funcId != null" >
+        FUNC_ID = #{record.funcId},
+      </if>
+      <if test="record.paramType != null" >
+        PARAM_TYPE = #{record.paramType},
+      </if>
+      <if test="record.paramName != null" >
+        PARAM_NAME = #{record.paramName},
+      </if>
+      <if test="record.required != null" >
+        REQUIRED = #{record.required},
+      </if>
+      <if test="record.isValidate != null" >
+        IS_VALIDATE = #{record.isValidate},
+      </if>
+      <if test="record.createdBy != null" >
+        CREATED_BY = #{record.createdBy},
+      </if>
+      <if test="record.creationTime != null" >
+        CREATION_TIME = #{record.creationTime},
+      </if>
+      <if test="record.modifiedBy != null" >
+        MODIFIED_BY = #{record.modifiedBy},
+      </if>
+      <if test="record.modificationTime != null" >
+        MODIFICATION_TIME = #{record.modificationTime},
+      </if>
+      <if test="record.deleteStatus != null" >
+        DELETE_STATUS = #{record.deleteStatus},
+      </if>
+      <if test="record.tableVer != null" >
+        TABLE_VER = #{record.tableVer},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AMS_PARAMS
+    set WID = #{record.wid},
+      FUNC_ID = #{record.funcId},
+      PARAM_TYPE = #{record.paramType},
+      PARAM_NAME = #{record.paramName},
+      REQUIRED = #{record.required},
+      IS_VALIDATE = #{record.isValidate},
+      CREATED_BY = #{record.createdBy},
+      CREATION_TIME = #{record.creationTime},
+      MODIFIED_BY = #{record.modifiedBy},
+      MODIFICATION_TIME = #{record.modificationTime},
+      DELETE_STATUS = #{record.deleteStatus},
+      TABLE_VER = #{record.tableVer}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haibei.pojo.application.Params" >
+    update T_AMS_PARAMS
+    <set >
+      <if test="funcId != null" >
+        FUNC_ID = #{funcId},
+      </if>
+      <if test="paramType != null" >
+        PARAM_TYPE = #{paramType},
+      </if>
+      <if test="paramName != null" >
+        PARAM_NAME = #{paramName},
+      </if>
+      <if test="required != null" >
+        REQUIRED = #{required},
+      </if>
+      <if test="isValidate != null" >
+        IS_VALIDATE = #{isValidate},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy},
+      </if>
+      <if test="creationTime != null" >
+        CREATION_TIME = #{creationTime},
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY = #{modifiedBy},
+      </if>
+      <if test="modificationTime != null" >
+        MODIFICATION_TIME = #{modificationTime},
+      </if>
+      <if test="deleteStatus != null" >
+        DELETE_STATUS = #{deleteStatus},
+      </if>
+      <if test="tableVer != null" >
+        TABLE_VER = #{tableVer},
+      </if>
+    </set>
+    where WID = #{wid}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haibei.pojo.application.Params" >
+    update T_AMS_PARAMS
+    set FUNC_ID = #{funcId},
+      PARAM_TYPE = #{paramType},
+      PARAM_NAME = #{paramName},
+      REQUIRED = #{required},
+      IS_VALIDATE = #{isValidate},
+      CREATED_BY = #{createdBy},
+      CREATION_TIME = #{creationTime},
+      MODIFIED_BY = #{modifiedBy},
+      MODIFICATION_TIME = #{modificationTime},
+      DELETE_STATUS = #{deleteStatus},
+      TABLE_VER = #{tableVer}
+    where WID = #{wid}
+  </update>
+</mapper>

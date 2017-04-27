@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haibei.dao.application.InterfaceMapper" >
+  <resultMap id="BaseResultMap" type="com.haibei.pojo.application.Interface" >
+    <id column="WID" property="wid" jdbcType="DECIMAL" />
+    <result column="BUSI_WID" property="busiWid" jdbcType="DECIMAL" />
+    <result column="FUNCTION_NAME" property="functionName" jdbcType="VARCHAR" />
+    <result column="FUNCTION_ALIAS" property="functionAlias" jdbcType="VARCHAR" />
+    <result column="FUNCTION_DES" property="functionDes" jdbcType="VARCHAR" />
+    <result column="ACCESS_URL" property="accessUrl" jdbcType="VARCHAR" />
+    <result column="IS_VALIDATE" property="isValidate" jdbcType="VARCHAR" />
+    <result column="RETURN_TYPE" property="returnType" jdbcType="VARCHAR" />
+    <result column="IS_INTERFACE" property="isInterface" jdbcType="VARCHAR" />
+    <result column="ACCESS_METHOD" property="accessMethod" jdbcType="VARCHAR" />
+    <result column="IS_AVAILABLE" property="isAvailable" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATION_TIME" property="creationTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+    <result column="MODIFICATION_TIME" property="modificationTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_STATUS" property="deleteStatus" jdbcType="VARCHAR" />
+    <result column="TABLE_VER" property="tableVer" jdbcType="DECIMAL" />
+  <!--    <association property="business"  column="BUSI_WID" select="com.haibei.dao.application.BusinessMapper.selectByPrimaryKey"></association>
+ -->
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WID, BUSI_WID, FUNCTION_NAME, FUNCTION_ALIAS, FUNCTION_DES, ACCESS_URL, IS_VALIDATE, 
+    RETURN_TYPE, IS_INTERFACE, ACCESS_METHOD, IS_AVAILABLE, CREATED_BY, CREATION_TIME, 
+    MODIFIED_BY, MODIFICATION_TIME, DELETE_STATUS, TABLE_VER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haibei.pojo.application.InterfaceExample" >
+    <include refid="common.Oracle_Pagination_Head" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_AMS_INTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="common.Oracle_Pagination_Tail" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AMS_INTERFACE
+    where WID = #{wid}
+  </select>
+  <select id="selectByBusiId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_AMS_INTERFACE
+    where BUSI_WID = #{wid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_AMS_INTERFACE
+    where WID = #{wid}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haibei.pojo.application.InterfaceExample" >
+    delete from T_AMS_INTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haibei.pojo.application.Interface" >
+    insert into T_AMS_INTERFACE (WID, BUSI_WID, FUNCTION_NAME, FUNCTION_ALIAS, FUNCTION_DES, ACCESS_URL, 
+      IS_VALIDATE, RETURN_TYPE, IS_INTERFACE, ACCESS_METHOD, IS_AVAILABLE, 
+      CREATED_BY, CREATION_TIME, MODIFIED_BY, MODIFICATION_TIME, DELETE_STATUS, 
+      TABLE_VER)
+    values (#{wid}, #{busiWid}, #{functionName}, #{functionAlias}, #{functionDes}, #{accessUrl}, 
+      #{isValidate}, #{returnType}, #{isInterface}, #{accessMethod}, #{isAvailable}, 
+      #{createdBy}, #{creationTime}, #{modifiedBy}, #{modificationTime}, #{deleteStatus}, 
+      #{tableVer})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haibei.pojo.application.Interface" >
+    insert into T_AMS_INTERFACE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="busiWid != null" >
+        BUSI_WID,
+      </if>
+      <if test="functionName != null" >
+        FUNCTION_NAME,
+      </if>
+      <if test="functionAlias != null" >
+        FUNCTION_ALIAS,
+      </if>
+      <if test="functionDes != null" >
+        FUNCTION_DES,
+      </if>
+      <if test="accessUrl != null" >
+        ACCESS_URL,
+      </if>
+      <if test="isValidate != null" >
+        IS_VALIDATE,
+      </if>
+      <if test="returnType != null" >
+        RETURN_TYPE,
+      </if>
+      <if test="isInterface != null" >
+        IS_INTERFACE,
+      </if>
+      <if test="accessMethod != null" >
+        ACCESS_METHOD,
+      </if>
+      <if test="isAvailable != null" >
+        IS_AVAILABLE,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="creationTime != null" >
+        CREATION_TIME,
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY,
+      </if>
+      <if test="modificationTime != null" >
+        MODIFICATION_TIME,
+      </if>
+      <if test="deleteStatus != null" >
+        DELETE_STATUS,
+      </if>
+      <if test="tableVer != null" >
+        TABLE_VER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid},
+      </if>
+      <if test="busiWid != null" >
+        #{busiWid},
+      </if>
+      <if test="functionName != null" >
+        #{functionName},
+      </if>
+      <if test="functionAlias != null" >
+        #{functionAlias},
+      </if>
+      <if test="functionDes != null" >
+        #{functionDes},
+      </if>
+      <if test="accessUrl != null" >
+        #{accessUrl},
+      </if>
+      <if test="isValidate != null" >
+        #{isValidate},
+      </if>
+      <if test="returnType != null" >
+        #{returnType},
+      </if>
+      <if test="isInterface != null" >
+        #{isInterface},
+      </if>
+      <if test="accessMethod != null" >
+        #{accessMethod},
+      </if>
+      <if test="isAvailable != null" >
+        #{isAvailable},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy},
+      </if>
+      <if test="creationTime != null" >
+        #{creationTime},
+      </if>
+      <if test="modifiedBy != null" >
+        #{modifiedBy},
+      </if>
+      <if test="modificationTime != null" >
+        #{modificationTime},
+      </if>
+      <if test="deleteStatus != null" >
+        #{deleteStatus},
+      </if>
+      <if test="tableVer != null" >
+        #{tableVer},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haibei.pojo.application.InterfaceExample" resultType="java.lang.Integer" >
+    select count(*) from T_AMS_INTERFACE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_AMS_INTERFACE
+    <set >
+      <if test="record.wid != null" >
+        WID = #{record.wid},
+      </if>
+      <if test="record.busiWid != null" >
+        BUSI_WID = #{record.busiWid},
+      </if>
+      <if test="record.functionName != null" >
+        FUNCTION_NAME = #{record.functionName},
+      </if>
+      <if test="record.functionAlias != null" >
+        FUNCTION_ALIAS = #{record.functionAlias},
+      </if>
+      <if test="record.functionDes != null" >
+        FUNCTION_DES = #{record.functionDes},
+      </if>
+      <if test="record.accessUrl != null" >
+        ACCESS_URL = #{record.accessUrl},
+      </if>
+      <if test="record.isValidate != null" >
+        IS_VALIDATE = #{record.isValidate},
+      </if>
+      <if test="record.returnType != null" >
+        RETURN_TYPE = #{record.returnType},
+      </if>
+      <if test="record.isInterface != null" >
+        IS_INTERFACE = #{record.isInterface},
+      </if>
+      <if test="record.accessMethod != null" >
+        ACCESS_METHOD = #{record.accessMethod},
+      </if>
+      <if test="record.isAvailable != null" >
+        IS_AVAILABLE = #{record.isAvailable},
+      </if>
+      <if test="record.createdBy != null" >
+        CREATED_BY = #{record.createdBy},
+      </if>
+      <if test="record.creationTime != null" >
+        CREATION_TIME = #{record.creationTime},
+      </if>
+      <if test="record.modifiedBy != null" >
+        MODIFIED_BY = #{record.modifiedBy},
+      </if>
+      <if test="record.modificationTime != null" >
+        MODIFICATION_TIME = #{record.modificationTime},
+      </if>
+      <if test="record.deleteStatus != null" >
+        DELETE_STATUS = #{record.deleteStatus},
+      </if>
+      <if test="record.tableVer != null" >
+        TABLE_VER = #{record.tableVer},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_AMS_INTERFACE
+    set WID = #{record.wid},
+      BUSI_WID = #{record.busiWid},
+      FUNCTION_NAME = #{record.functionName},
+      FUNCTION_ALIAS = #{record.functionAlias},
+      FUNCTION_DES = #{record.functionDes},
+      ACCESS_URL = #{record.accessUrl},
+      IS_VALIDATE = #{record.isValidate},
+      RETURN_TYPE = #{record.returnType},
+      IS_INTERFACE = #{record.isInterface},
+      ACCESS_METHOD = #{record.accessMethod},
+      IS_AVAILABLE = #{record.isAvailable},
+      CREATED_BY = #{record.createdBy},
+      CREATION_TIME = #{record.creationTime},
+      MODIFIED_BY = #{record.modifiedBy},
+      MODIFICATION_TIME = #{record.modificationTime},
+      DELETE_STATUS = #{record.deleteStatus},
+      TABLE_VER = #{record.tableVer}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haibei.pojo.application.Interface" >
+    update T_AMS_INTERFACE
+    <set >
+      <if test="busiWid != null" >
+        BUSI_WID = #{busiWid},
+      </if>
+      <if test="functionName != null" >
+        FUNCTION_NAME = #{functionName},
+      </if>
+      <if test="functionAlias != null" >
+        FUNCTION_ALIAS = #{functionAlias},
+      </if>
+      <if test="functionDes != null" >
+        FUNCTION_DES = #{functionDes},
+      </if>
+      <if test="accessUrl != null" >
+        ACCESS_URL = #{accessUrl},
+      </if>
+      <if test="isValidate != null" >
+        IS_VALIDATE = #{isValidate},
+      </if>
+      <if test="returnType != null" >
+        RETURN_TYPE = #{returnType},
+      </if>
+      <if test="isInterface != null" >
+        IS_INTERFACE = #{isInterface},
+      </if>
+      <if test="accessMethod != null" >
+        ACCESS_METHOD = #{accessMethod},
+      </if>
+      <if test="isAvailable != null" >
+        IS_AVAILABLE = #{isAvailable},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy},
+      </if>
+      <if test="creationTime != null" >
+        CREATION_TIME = #{creationTime},
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY = #{modifiedBy},
+      </if>
+      <if test="modificationTime != null" >
+        MODIFICATION_TIME = #{modificationTime},
+      </if>
+      <if test="deleteStatus != null" >
+        DELETE_STATUS = #{deleteStatus},
+      </if>
+      <if test="tableVer != null" >
+        TABLE_VER = #{tableVer},
+      </if>
+    </set>
+    where WID = #{wid}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haibei.pojo.application.Interface" >
+    update T_AMS_INTERFACE
+    set BUSI_WID = #{busiWid},
+      FUNCTION_NAME = #{functionName},
+      FUNCTION_ALIAS = #{functionAlias},
+      FUNCTION_DES = #{functionDes},
+      ACCESS_URL = #{accessUrl},
+      IS_VALIDATE = #{isValidate},
+      RETURN_TYPE = #{returnType},
+      IS_INTERFACE = #{isInterface},
+      ACCESS_METHOD = #{accessMethod},
+      IS_AVAILABLE = #{isAvailable},
+      CREATED_BY = #{createdBy},
+      CREATION_TIME = #{creationTime},
+      MODIFIED_BY = #{modifiedBy},
+      MODIFICATION_TIME = #{modificationTime},
+      DELETE_STATUS = #{deleteStatus},
+      TABLE_VER = #{tableVer}
+    where WID = #{wid}
+  </update>
+</mapper>

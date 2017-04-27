@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haibei.dao.application.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.haibei.pojo.application.Resource" >
+    <id column="WID" property="wid" jdbcType="DECIMAL" />
+    <result column="APP_ID" property="appId" jdbcType="DECIMAL" />
+    <result column="CLASS_ID" property="classId" jdbcType="DECIMAL" />
+    <result column="RES_NAME" property="resName" jdbcType="VARCHAR" />
+    <result column="RES_DES" property="resDes" jdbcType="VARCHAR" />
+    <result column="RES_NO" property="resNo" jdbcType="VARCHAR" />
+    <result column="RES_TYPE" property="resType" jdbcType="VARCHAR" />
+    <result column="RES_KEY" property="resKey" jdbcType="VARCHAR" />
+    <result column="MENU_ICON" property="menuIcon" jdbcType="VARCHAR" />
+    <result column="P_MENU" property="pMenu" jdbcType="VARCHAR" />
+    <result column="ACCESS_URL" property="accessUrl" jdbcType="VARCHAR" />
+    <result column="IS_TOP_MENU" property="isTopMenu" jdbcType="VARCHAR" />
+    <result column="IS_USEABLE" property="isUseable" jdbcType="VARCHAR" />
+    <result column="IS_DISPLAY" property="isDisplay" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="CREATION_TIME" property="creationTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFIED_BY" property="modifiedBy" jdbcType="VARCHAR" />
+    <result column="MODIFICATION_TIME" property="modificationTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_STATUS" property="deleteStatus" jdbcType="VARCHAR" />
+    <result column="TABLE_VER" property="tableVer" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WID, APP_ID, CLASS_ID, RES_NAME, RES_DES, RES_NO, RES_TYPE, RES_KEY, MENU_ICON, P_MENU, 
+    ACCESS_URL, IS_TOP_MENU, IS_USEABLE, IS_DISPLAY, CREATED_BY, CREATION_TIME, MODIFIED_BY, 
+    MODIFICATION_TIME, DELETE_STATUS, TABLE_VER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haibei.pojo.application.ResourceExample" >
+    <include refid="common.Oracle_Pagination_Head" />
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_APP_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="common.Oracle_Pagination_Tail" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_APP_RESOURCE
+    where WID = #{wid}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_APP_RESOURCE
+    where WID = #{wid}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haibei.pojo.application.ResourceExample" >
+    delete from T_APP_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haibei.pojo.application.Resource" >
+    insert into T_APP_RESOURCE (WID, APP_ID, CLASS_ID, RES_NAME, RES_DES, RES_NO, RES_TYPE, 
+      RES_KEY, MENU_ICON, P_MENU, ACCESS_URL, IS_TOP_MENU, IS_USEABLE, IS_DISPLAY, 
+      CREATED_BY, CREATION_TIME, MODIFIED_BY, MODIFICATION_TIME, DELETE_STATUS, 
+      TABLE_VER)
+    values (#{wid}, #{appId}, #{classId}, #{resName}, #{resDes}, #{resNo}, #{resType}, 
+      #{resKey}, #{menuIcon}, #{pMenu}, #{accessUrl}, #{isTopMenu}, #{isUseable}, #{isDisplay}, 
+      #{createdBy}, #{creationTime}, #{modifiedBy}, #{modificationTime}, #{deleteStatus}, 
+      #{tableVer})
+  </insert>
+  <insert id="insertSelective" parameterType="com.haibei.pojo.application.Resource" >
+    insert into T_APP_RESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        WID,
+      </if>
+      <if test="appId != null" >
+        APP_ID,
+      </if>
+      <if test="classId != null" >
+        CLASS_ID,
+      </if>
+      <if test="resName != null" >
+        RES_NAME,
+      </if>
+      <if test="resDes != null" >
+        RES_DES,
+      </if>
+      <if test="resNo != null" >
+        RES_NO,
+      </if>
+      <if test="resType != null" >
+        RES_TYPE,
+      </if>
+      <if test="resKey != null" >
+        RES_KEY,
+      </if>
+      <if test="menuIcon != null" >
+        MENU_ICON,
+      </if>
+      <if test="pMenu != null" >
+        P_MENU,
+      </if>
+      <if test="accessUrl != null" >
+        ACCESS_URL,
+      </if>
+      <if test="isTopMenu != null" >
+        IS_TOP_MENU,
+      </if>
+      <if test="isUseable != null" >
+        IS_USEABLE,
+      </if>
+      <if test="isDisplay != null" >
+        IS_DISPLAY,
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY,
+      </if>
+      <if test="creationTime != null" >
+        CREATION_TIME,
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY,
+      </if>
+      <if test="modificationTime != null" >
+        MODIFICATION_TIME,
+      </if>
+      <if test="deleteStatus != null" >
+        DELETE_STATUS,
+      </if>
+      <if test="tableVer != null" >
+        TABLE_VER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wid != null" >
+        #{wid},
+      </if>
+      <if test="appId != null" >
+        #{appId},
+      </if>
+      <if test="classId != null" >
+        #{classId},
+      </if>
+      <if test="resName != null" >
+        #{resName},
+      </if>
+      <if test="resDes != null" >
+        #{resDes},
+      </if>
+      <if test="resNo != null" >
+        #{resNo},
+      </if>
+      <if test="resType != null" >
+        #{resType},
+      </if>
+      <if test="resKey != null" >
+        #{resKey},
+      </if>
+      <if test="menuIcon != null" >
+        #{menuIcon},
+      </if>
+      <if test="pMenu != null" >
+        #{pMenu},
+      </if>
+      <if test="accessUrl != null" >
+        #{accessUrl},
+      </if>
+      <if test="isTopMenu != null" >
+        #{isTopMenu},
+      </if>
+      <if test="isUseable != null" >
+        #{isUseable},
+      </if>
+      <if test="isDisplay != null" >
+        #{isDisplay},
+      </if>
+      <if test="createdBy != null" >
+        #{createdBy},
+      </if>
+      <if test="creationTime != null" >
+        #{creationTime},
+      </if>
+      <if test="modifiedBy != null" >
+        #{modifiedBy},
+      </if>
+      <if test="modificationTime != null" >
+        #{modificationTime},
+      </if>
+      <if test="deleteStatus != null" >
+        #{deleteStatus},
+      </if>
+      <if test="tableVer != null" >
+        #{tableVer},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haibei.pojo.application.ResourceExample" resultType="java.lang.Integer" >
+    select count(*) from T_APP_RESOURCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_APP_RESOURCE
+    <set >
+      <if test="record.wid != null" >
+        WID = #{record.wid},
+      </if>
+      <if test="record.appId != null" >
+        APP_ID = #{record.appId},
+      </if>
+      <if test="record.classId != null" >
+        CLASS_ID = #{record.classId},
+      </if>
+      <if test="record.resName != null" >
+        RES_NAME = #{record.resName},
+      </if>
+      <if test="record.resDes != null" >
+        RES_DES = #{record.resDes},
+      </if>
+      <if test="record.resNo != null" >
+        RES_NO = #{record.resNo},
+      </if>
+      <if test="record.resType != null" >
+        RES_TYPE = #{record.resType},
+      </if>
+      <if test="record.resKey != null" >
+        RES_KEY = #{record.resKey},
+      </if>
+      <if test="record.menuIcon != null" >
+        MENU_ICON = #{record.menuIcon},
+      </if>
+      <if test="record.pMenu != null" >
+        P_MENU = #{record.pMenu},
+      </if>
+      <if test="record.accessUrl != null" >
+        ACCESS_URL = #{record.accessUrl},
+      </if>
+      <if test="record.isTopMenu != null" >
+        IS_TOP_MENU = #{record.isTopMenu},
+      </if>
+      <if test="record.isUseable != null" >
+        IS_USEABLE = #{record.isUseable},
+      </if>
+      <if test="record.isDisplay != null" >
+        IS_DISPLAY = #{record.isDisplay},
+      </if>
+      <if test="record.createdBy != null" >
+        CREATED_BY = #{record.createdBy},
+      </if>
+      <if test="record.creationTime != null" >
+        CREATION_TIME = #{record.creationTime},
+      </if>
+      <if test="record.modifiedBy != null" >
+        MODIFIED_BY = #{record.modifiedBy},
+      </if>
+      <if test="record.modificationTime != null" >
+        MODIFICATION_TIME = #{record.modificationTime},
+      </if>
+      <if test="record.deleteStatus != null" >
+        DELETE_STATUS = #{record.deleteStatus},
+      </if>
+      <if test="record.tableVer != null" >
+        TABLE_VER = #{record.tableVer},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_APP_RESOURCE
+    set WID = #{record.wid},
+      APP_ID = #{record.appId},
+      CLASS_ID = #{record.classId},
+      RES_NAME = #{record.resName},
+      RES_DES = #{record.resDes},
+      RES_NO = #{record.resNo},
+      RES_TYPE = #{record.resType},
+      RES_KEY = #{record.resKey},
+      MENU_ICON = #{record.menuIcon},
+      P_MENU = #{record.pMenu},
+      ACCESS_URL = #{record.accessUrl},
+      IS_TOP_MENU = #{record.isTopMenu},
+      IS_USEABLE = #{record.isUseable},
+      IS_DISPLAY = #{record.isDisplay},
+      CREATED_BY = #{record.createdBy},
+      CREATION_TIME = #{record.creationTime},
+      MODIFIED_BY = #{record.modifiedBy},
+      MODIFICATION_TIME = #{record.modificationTime},
+      DELETE_STATUS = #{record.deleteStatus},
+      TABLE_VER = #{record.tableVer}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haibei.pojo.application.Resource" >
+    update T_APP_RESOURCE
+    <set >
+      <if test="appId != null" >
+        APP_ID = #{appId},
+      </if>
+      <if test="classId != null" >
+        CLASS_ID = #{classId},
+      </if>
+      <if test="resName != null" >
+        RES_NAME = #{resName},
+      </if>
+      <if test="resDes != null" >
+        RES_DES = #{resDes},
+      </if>
+      <if test="resNo != null" >
+        RES_NO = #{resNo},
+      </if>
+      <if test="resType != null" >
+        RES_TYPE = #{resType},
+      </if>
+      <if test="resKey != null" >
+        RES_KEY = #{resKey},
+      </if>
+      <if test="menuIcon != null" >
+        MENU_ICON = #{menuIcon},
+      </if>
+      <if test="pMenu != null" >
+        P_MENU = #{pMenu},
+      </if>
+      <if test="accessUrl != null" >
+        ACCESS_URL = #{accessUrl},
+      </if>
+      <if test="isTopMenu != null" >
+        IS_TOP_MENU = #{isTopMenu},
+      </if>
+      <if test="isUseable != null" >
+        IS_USEABLE = #{isUseable},
+      </if>
+      <if test="isDisplay != null" >
+        IS_DISPLAY = #{isDisplay},
+      </if>
+      <if test="createdBy != null" >
+        CREATED_BY = #{createdBy},
+      </if>
+      <if test="creationTime != null" >
+        CREATION_TIME = #{creationTime},
+      </if>
+      <if test="modifiedBy != null" >
+        MODIFIED_BY = #{modifiedBy},
+      </if>
+      <if test="modificationTime != null" >
+        MODIFICATION_TIME = #{modificationTime},
+      </if>
+      <if test="deleteStatus != null" >
+        DELETE_STATUS = #{deleteStatus},
+      </if>
+      <if test="tableVer != null" >
+        TABLE_VER = #{tableVer},
+      </if>
+    </set>
+    where WID = #{wid}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haibei.pojo.application.Resource" >
+    update T_APP_RESOURCE
+    set APP_ID = #{appId},
+      CLASS_ID = #{classId},
+      RES_NAME = #{resName},
+      RES_DES = #{resDes},
+      RES_NO = #{resNo},
+      RES_TYPE = #{resType},
+      RES_KEY = #{resKey},
+      MENU_ICON = #{menuIcon},
+      P_MENU = #{pMenu},
+      ACCESS_URL = #{accessUrl},
+      IS_TOP_MENU = #{isTopMenu},
+      IS_USEABLE = #{isUseable},
+      IS_DISPLAY = #{isDisplay},
+      CREATED_BY = #{createdBy},
+      CREATION_TIME = #{creationTime},
+      MODIFIED_BY = #{modifiedBy},
+      MODIFICATION_TIME = #{modificationTime},
+      DELETE_STATUS = #{deleteStatus},
+      TABLE_VER = #{tableVer}
+    where WID = #{wid}
+  </update>
+</mapper>
